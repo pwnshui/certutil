@@ -21,7 +21,7 @@
 # --playlist-reverse
 
 # Uniform Format
---prefer-ffmpeg
+
 --merge-output-format mp4
 -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
 
