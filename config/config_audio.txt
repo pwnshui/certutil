@@ -28,11 +28,13 @@
 --write-sub
 --all-subs
 --convert-subs srt
+--embed-subs
 
 # Get metadata
 --add-metadata
---write-description
---write-thumbnail
+#--write-description
+#--write-thumbnail
+--embed-thumbnail
 
 # Debug
 --no-check-certificate
@@ -43,9 +45,9 @@
 #-4
 
 # Default, it tries to download as mp4 format. you need to pass -x option to (download) convert to mp3.
---write-annotations
+#--write-annotations
 --write-all-thumbnails
---write-info-json
+#--write-info-json
 --no-mtime
 
 --xattrs
