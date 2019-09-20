@@ -21,7 +21,7 @@
 # --playlist-reverse
 
 # Uniform Format
---prefer-ffmpeg
+
 -f 'bestaudio'
 
 # Get All Subs to SRT
