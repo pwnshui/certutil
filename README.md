@@ -1,2 +1,2 @@
-# ctf2018
-ctf practiced material
+# Certutil-base64-encoded
+All rights reserved.
