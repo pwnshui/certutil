@@ -28,13 +28,14 @@
 --write-sub
 --all-subs
 --convert-subs srt
---embed-subs
+
 
 # Get metadata
 --add-metadata
 #--write-description
 #--write-thumbnail
 --embed-thumbnail
+--embed-subs
 
 # Debug
 --no-check-certificate
