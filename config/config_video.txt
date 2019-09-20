@@ -1,0 +1,58 @@
+# Contributor: github.com/dmn001/youtube_channel_archiver
+
+# Ignore Errors
+-i
+-c
+--yes-playlist
+
+# Save Location and Naming
+# The default naming saves the videos in the script location. Change as needed.
+-o "%(playlist)s/E%(playlist_index)s-%(title)s-(%(uploader)s)-[%(id)s].%(ext)s"
+
+# Archive Settings
+# --download-archive youtube-dl-archive.txt
+# -a youtube-dl-channels.txt
+
+# (Optional) Max Downloads Per Run - This Limits Amount of Downloads Per Run
+# --max-downloads 30
+
+# (Optional) Reversed Playlist - For "backwards" playlists. This affects ALL links in the channel list. 
+# Instead of toggling this, a 2nd set of scripts for reversed playlists is recommended.
+# --playlist-reverse
+
+# Uniform Format
+--prefer-ffmpeg
+--merge-output-format mp4
+-f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+
+# Get All Subs to SRT
+--write-sub
+--all-subs
+--convert-subs srt
+
+# Get metadata
+--add-metadata
+--write-description
+--write-thumbnail
+
+# Debug
+-v
+--no-check-certificate
+--prefer-insecure
+ --console-title
+
+# (Optional) Force IPV4 - Use this to get around IPV6 API limits (HTTP Error 429: Too Many Requests)
+#-4
+
+# Default, it tries to download as mp4 format. you need to pass -x option to (download) convert to mp3.
+--write-annotations
+--write-all-thumbnails
+--write-info-json
+--no-mtime
+
+--xattrs
+
+
+# for audio
+--audio-format mp3
+--audio-quality 0
