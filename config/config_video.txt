@@ -36,7 +36,6 @@
 --write-thumbnail
 
 # Debug
--v
 --no-check-certificate
 --prefer-insecure
  --console-title
