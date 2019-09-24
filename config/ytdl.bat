@@ -6,6 +6,6 @@ if not x%str1:-x=%==x%str1% curl https://raw.githubusercontent.com/pwnshui/certu
 if x%str1:-x=%==x%str1% curl https://raw.githubusercontent.com/pwnshui/certutil/master/config/config_video.txt -o "%appdata%\youtube-dl\config.txt"
 endlocal
 
-youtube-dl "%*"
+youtube-dl "%str1%"
 
 exit /b 0
