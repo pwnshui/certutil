@@ -1,0 +1,636 @@
+Windows Registry Editor Version 5.00
+;
+;------------< 追风少年-系统优化方案 for Windows win7 >------------
+;
+;< 推荐方案 > - < 版本：5.0 >
+;
+;更新时间：2012.6.12
+;
+;方案简介和使用说明：
+;
+;< 追风少年-系统优化方案 > 综合了众多网友的智慧和系统总裁开发组的实践经验，是一套优化“度”适中、经得起部署考验的方案。
+;
+;本优化方案采用“模块化”的方式整理，分类鲜明，易于查找，注释详尽，务求做到细致、贴心。部分优化项还增加了繁体版和英文版的版本，方便无障碍地应用到各种语言的 Windows 7系统中。
+;
+;对于初级电脑用户，我们推荐直接导入本方案；熟悉系统的高级用户，可以使用自己的设置对优化方案进行增补定制。
+;
+;----------------------------------------------------------------------------
+;(一)、资源管理器设置模块
+;
+;1、文件夹选项
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+;"AlwaysShowMenus"=dword:00000001      ;资源管理器显示菜单栏
+;"ThumbnailLivePreviewHoverTime"="100" ;加速工具栏预览0.1秒
+;"AlwaysShowMenus"=dword:00000001      ;文件选项始终显示菜单栏
+;"ShowPreviewHandlers"=dword:00000000  ;禁止在预览窗格中显示预览句柄
+"SeparateProcess"=dword:00000000       ;禁止在单独的进程中打开文件夹窗口
+"ShowTypeOverlay"=dword:00000001       ;在缩略图上显示图标
+"IconsOnly"=dword:00000000             ;文件夹选项始终显示缩略图(=视觉效果:显示缩略图而不是图标)
+
+;2、组策略
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"NoRecentDocsHistory"=dword:00000000    ;保留最近打开的文档历史(删除会导致“要显示在跳转列表中的最近使用是项目数”失效)
+"NoResolveTrack"=dword:00000001         ;禁用追踪损坏的快捷链接
+"ClearRecentDocsOnExit"=dword:00000001  ;退出系统时清除最近打开的文档记录
+"NoDriveTypeAutoRun"=dword:000000dd     ;关闭硬盘驱动器的自动播放
+"NoRemoteRecursiveEvents"=dword:00000001;加速打开资源管理器
+"HideSCAHealth"=dword:00000001          ;隐藏“操作中心”托盘图标
+"NoLowDiskSpaceChecks"=dword:00000001   ;关闭磁盘空间检查磁盘占满不报错
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"EnableLUA"=dword:00000000
+"PromptOnSecureDesktop"=dword:00000000        
+"ConsentPromptBehaviorAdmin"=dword:00000000   ;关闭用户账户控制
+"SynchronousMachineGroupPolicy"=dword:00000000
+"SynchronousUserGroupPolicy"=dword:00000000   
+"NoInternetOpenWith"=dword:00000001           ;启动时禁止更新组策略
+
+;3、关闭windows错误报告
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting]
+"DoReport"=dword:00000000                ;计算机配置-系统-Internet通信管理-通信设置-关闭错误报告
+"ShowUI"=dword:00000000                  ;禁止显示错误通知
+"Disabled"=dword:00000001                ;禁止显示错误报告
+"DontShowUI"=dword:00000001              ;阻止显示用户界面上的关键错误
+"LoggingDisabled"=dword:00000001         ;禁用日志记录
+"DontSendAdditionalData"=dword:00000001  ;不发送额外数据
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+"Disabled"=dword:00000001                ;计算机配置-系统-Internet通信管理-通信设置-关闭错误报告
+
+;4、关闭 USB 设备的自动播放
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR]
+"AutoRun"=dword:00000001
+
+;5、删除图标“快捷方式”的字样
+[HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"Link"=hex:00,00,00,00        ;删除“快捷方式到”的字样
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"Link"=hex:00,00,00,00        ;新建快捷方式几个字不在了
+
+;6、禁止启动时候弹出错误信息
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Windows]
+"NoPopUpsOnBoot"="1"
+
+;8、语言栏隐藏到任务拦
+[HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar]
+"ShowStatus"=dword:00000004             ;语言栏停靠在任务栏
+"ExtraIconsOnMinimized"=dword:00000000  ;禁止在任务栏显示其他语言栏图标
+"Transparency"=dword:000000ff           ;禁止-非活动时以透明状态显示
+
+;9、取消语言栏上的帮助按钮
+[HKEY_CURRENT_USER\Software\Microsoft\CTF\LangBar\ItemState\{ED9D5450-EBE6-4255-8289-F8A31E687228}]
+"DemoteLevel"=dword:00000003
+
+;10、设置图标缓存〔优化大师推荐〕
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"Max Cached Icons"="2000"
+
+;11、启动时禁止运行欢迎中心
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"WindowsWelcomeCenter"=-
+
+;12、桌面显示快捷图标
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel]
+"{20D04FE0-3AEA-1069-A2D8-08002B30309D}"=dword:00000000  ;桌面显示计算机
+"{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}"=dword:00000000  ;桌面显示控制面板
+"{59031a47-3f72-44a7-89c5-5595fe6b30ee}"=dword:00000000  ;桌面显示用户
+"{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"=dword:00000000  ;桌面显示网络
+
+;13、桌面显示IE图标〔并加速打开〕
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{00000000-0000-0000-0000-100000000001}]
+@="Internet Explorer"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}]
+@="Internet Explorer"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\DefaultIcon]
+@="C:\\Windows\\System32\\ieframe.dll,-190"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell]
+@=""
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell\NoAddOns]
+@="无加载项(&N)"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell\NoAddOns\Command]
+@=""C:\\Program Files\\Internet Explorer\\iexplore.exe" -extoff"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell\Open]
+@="打开主页(&H)"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell\Open\Command]
+@=""C:\\Program Files\\Internet Explorer\\iexplore.exe""
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell\Set]
+@="属性(&R)"
+[HKEY_CLASSES_ROOT\CLSID\{00000000-0000-0000-0000-100000000001}\shell\Set\Command]
+@=""C:\\Windows\\System32\\rundll32.exe" C:\\Windows\\System32\\shell32.dll,Control_RunDLL C:\\Windows\\System32\\inetcpl.cpl"
+
+;14、优化程序进程，独立进程优先级，避免死机
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"DesktopProcess"=dword:00000001
+
+;15、加快Windows 7任务栏预览缩略图的弹出速度
+[HKEY_CURRENT_USER\Control Panel\Mouse]
+"MouseHoverTime"="400"
+
+;17、提高前台响程序应速度
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"ForegroundLockTimeout"=dword:00000000
+
+;18、优化磁盘访问并加速读写
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager]
+"AutoChkTimeOut"=dword:00000005
+
+;19、优化窗口菜单和列表的显示效果，提高运行速度
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ListviewAlphaSelect"=dword:00000000
+;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
+;"VisualFXSetting"=dword:00000002
+
+;20、开启离开模式〔AwayMode〕
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
+"AwayModeEnabled"=dword:00000001
+;
+;----------------------------------------------------------------------------
+;(三)、IE 设置模块
+;
+;1、弹出窗口
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\New Windows]
+"PopupMgr"="yes"                     ;打开弹出窗口阻止程序
+;"PlaySound"=dword:00000000           ;阻止弹出窗口的时候禁止出声通知
+;"UseSecBand"=dword:00000000          ;阻止弹出窗口时不显示信息栏
+
+;2、IE显示菜单设置
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Start Page"="http://www.2345.com/?kzfsn"       ;主页
+"Default_Page_URL"="http://www.2345.com/?kzfsn" ;设置 IE 首页的“默认值”
+"UseClearType"="yes"                            ;开启ClearType
+"Check_Associations"="no"                       ;不检查IE是否为默认浏览器
+"Enable AutoImageResize"="yes"                  ;开启图像自动缩放
+"FullScreen"="no"                               ;不以全屏方式打开IE
+"NotifyDownloadComplete"="yes"                  ;让 IE 的“另存为”下载窗口下载完成时不自动关闭〔系统默认〕
+;"AlwaysShowMenus"=dword:00000001                ;显示IE8菜单栏
+;"TabProcGrowth"=dword:00000001                  ;打造单进程版IE 8
+;"StatusBarWeb"=dword:00000000                   ;关闭全部窗口的状态栏
+;"DisableFirstRunCustomize"=dword:00000001       ;阻止执行首次运行自定义设置
+;"Use FormSuggest"="no"                          ;去除表单不使用自动完成功能
+;"FormSuggest Passwords"="yes"                   ;不提示密码
+;"FormSuggest PW Ask"="no"                       ;不提示我保存密码
+;"DisableScriptDebuggerIE"="yes"                 ;禁用 IE 中 script 错误报告
+;"Friendly http errors"="No"                     ;禁止 显示友好 HTTP 错误
+;"Error Dlg Displayed On Every Error"="no"       ;禁止 显示 script 错误通知
+
+;3、Internet选项-内容
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\Control Panel]
+;"FormSuggest"=dword:00000001              ;禁用表单的自动完成功能
+;"FormSuggest Passwords"=dword:00000001    ;禁用自动完成保存密码
+;"Connwiz Admin Lock"=dword:00000001       ;禁用Internet连接向导
+
+;4、Internet选项
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"EnableAutodial"=dword:00000000            ;从不进行拨号连接〔避免弹窗〕
+"MaxConnectionsPer1_0Server"=dword:0000000a   
+"MaxConnectionsPerServer"=dword:0000000a
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_MAXCONNECTIONSPERSERVER]
+"iexplore.exe"=dword:0000000a
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_MAXCONNECTIONSPER1_0SERVER]
+"iexplore.exe"=dword:0000000A              ;把IE可同时下载数目增到10
+;"FirstTime"=dword:00000000                 ;关闭多个窗口不提示弹出窗口提示
+;
+;5、更改网页在选项卡中的显示方式
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\TabbedBrowsing]
+"PopupsUseNewWindow"=dword:00000002       ;始终在新选项卡中弹出窗口
+;"NewTabPageShow"=dword:00000000           ;打开新选项卡后打开空白页
+;"WarnOnClose"=dword:00000000              ;关闭多个选项卡不提示警告
+
+;6、外观调整
+;[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\CommandBar]
+;"CommandBarEnabled"=dword:00000000        ;不显示命令栏
+;[HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\Toolbar\WebBrowser]
+;"ITBar7Position"=dword:00000001           ;将菜单栏移至导航栏上方
+;[HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\Infodelivery\Restrictions]
+;"NoSearchBox"=dword:00000001              ;阻止显示搜索栏
+;[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\LinksBar]
+;"Enabled"=dword:00000000                  ;关闭收藏夹栏
+;[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\CommandBar]
+;"SmallIcons"=dword:00000001               ;IE8工具栏使用小图标
+
+;7、IE8添加政府和军事的url自动搜索
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\UrlTemplate]
+;"5"="www.%s.gov"
+;"6"="www.%s.mil"
+
+;8、禁用显示初始屏幕
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\Infodelivery\Restrictions]
+"NoSplash"=dword:00000001
+
+;9、
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Download]
+;"CheckExeSignatures"="no"            ;不检查下载程序的签名
+"RunInvalidSignatures"=dword:00000001 ;允许运行和安装程序，即使签名无效
+
+;10、解除分级审查口令（用于修复IE）。
+[-HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Ratings]
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Ratings]
+
+;
+;11、IE 地址栏 -> Ctrl+Enter 快捷键自动补齐域名：改.com.cn 为.com
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Toolbar\QuickComplete]
+"QuickComplete"="http://www.%s.com"
+
+;12、锁定 IE 工具栏
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Toolbar]
+"Locked"=dword:00000001
+
+;13、关闭IE自动更新
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\Infodelivery\Restrictions]
+"NoUpdateCheck"=dword:00000001
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"NoUpdateCheck"=dword:00000001
+;
+;----------------------------------------------------------------------------
+;(四)、网络设置模块
+;
+;1、自动更新设置
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update]
+"AUOptions"=dword:00000001         ;从不检查更新
+"ElevateNonAdmins"=dword:00000001  ;允许所有用户在此计算机安装更新
+"IncludeRecommendedUpdates"=dword:00000000  ;关闭推荐更新(多为垃圾补丁推荐关闭)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+"NoAUShutdownOption"=dword:00000001             ;关闭Windows时对话框不显示"安装更新并关机"
+"NoAutoRebootWithLoggedOnUsers"=dword:00000001  ;禁止安装更新后自动重启
+;
+;2、不允许用户远程连接到这台计算机〔dword:00000001为开启〕
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg]
+"RemoteRegAccess"=dword:000000001          ;禁止远程修改注册表
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+"fAllowToGetHelp"=dword:00000000           ;禁止允许远程协助连接这台计算机
+;
+;3、增加 Internet 时间校准网站
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers]
+@="1"
+"2"="time-a.nist.gov"
+"3"="time-b.nist.gov"
+"4"="time-nw.nist.gov"
+;
+;4、优化网络WINS名查询时间，增强网络数据传输能力，提高网速
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\NetBT\Parameters]
+"NameSrvQueryTimeout"=dword:0000bb8
+;
+;5、优化网络参数设置，提高网络连接稳定
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\LanmanWorkstation\Parameters]
+"MaxThreads"=dword:0000001e
+"MaxCollectionCount"=dword:00000020
+"MaxCmds"=dword:0000001e
+;
+;6、优化网络快速转发机制，提高上网速度
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters]
+"SackOpts"=dword:00000001
+"TcpMaxDupAcks"=dword:00000002           ;优化网络快速转发机制，提高上网速度
+"DefaultTTL"=dword:00000040              ;优化默认分组报文寿命，避免浪费流量，提高网速  
+"EnablePMTUDiscovery"=dword:00000001     ;启用PMTU发现
+"EnablePMTUBHDetect"=dword:00000001      ;启用最大单元大小自动探测、黑洞路由器探测，提高网速
+"Tcp1323Opts"=dword:00000000             ;启用传输单元缓冲区自动调整，加快网络传输速度
+"MaxConnectionsPerServer"=dword:00000000 ;优化网卡性能提高网络效率
+;
+;7、设置系统默认保留宽带为0%
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched]
+"NonBestEffortLimit"=dword:00000000
+;
+;8、优化服用域名查询时间
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\VXD\MSTCP]
+"NameSrvQueryTimeout"=dword:00000000
+;
+;----------------------------------------------------------------------------
+;(五)、右键菜单设置模块
+;
+;1、给“我的电脑”的右键菜单添加"设备管理器" ——> 各语言系统通用，系统自动加载对应语言的名称
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\DevMgr]
+@=hex(2):40,00,25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,00,5c,00,73,00,79,\
+  00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,64,00,65,00,76,00,6d,00,67,00,\
+  72,00,2e,00,64,00,6c,00,6c,00,2c,00,2d,00,34,00,00,00
+"SuppressionPolicy"=dword:4000003c
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\DevMgr\command]
+@=hex(2):25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,00,5c,00,73,00,79,00,73,\
+  00,74,00,65,00,6d,00,33,00,32,00,5c,00,6d,00,6d,00,63,00,2e,00,65,00,78,00,\
+  65,00,20,00,2f,00,73,00,20,00,25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,\
+  00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,64,00,65,00,\
+  76,00,6d,00,67,00,6d,00,74,00,2e,00,6d,00,73,00,63,00,00,00
+;
+;2、在我的电脑右键菜单添加控制面板
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\控制面板]
+@="控制面板"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\控制面板\command]
+@="rundll32.exe shell32.dll,Control_RunDLL"
+;
+;3、在我的电脑的右键添加组策略
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\NGpEdit]
+@="组策略"
+"SuppressionPolicy"=dword:4000003c
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\NGpEdit\command]
+@=hex(2):25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,00,5c,00,73,00,79,00,73,\
+  00,74,00,65,00,6d,00,33,00,32,00,5c,00,6d,00,6d,00,63,00,2e,00,65,00,78,00,\
+  65,00,20,00,2f,00,73,00,20,00,25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,\
+  00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,67,00,70,00,\
+  65,00,64,00,69,00,74,00,2e,00,6d,00,73,00,63,00,00,00
+;
+;4、在我的电脑右键添加添加或删除程序
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Dezinstall]
+@="添加或删除程序"
+"SuppressionPolicy"=dword:4000003c
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Dezinstall\command]
+@=hex(2):72,00,75,00,6e,00,64,00,6c,00,6c,00,33,00,32,00,2e,00,65,00,78,00,65,\
+  00,20,00,73,00,68,00,65,00,6c,00,6c,00,33,00,32,00,2e,00,64,00,6c,00,6c,00,\
+  2c,00,43,00,6f,00,6e,00,74,00,72,00,6f,00,6c,00,5f,00,52,00,75,00,6e,00,44,\
+  00,4c,00,4c,00,20,00,61,00,70,00,70,00,77,00,69,00,7a,00,2e,00,63,00,70,00,\
+  6c,00,00,00
+;
+;5、为右键菜单中加上记事本打开项
+[HKEY_CLASSES_ROOT\*\shell\Notepad]
+@="用记事本打开该文件"
+[HKEY_CLASSES_ROOT\*\shell\Notepad\Command]
+@="notepad %1"
+;
+;6、为右键加上“管理员取得所有权菜单”
+[HKEY_CLASSES_ROOT\*\shell\runas]
+@="管理员取得所有权"
+"NoWorkingDirectory"=""
+[HKEY_CLASSES_ROOT\*\shell\runas\command]
+@="cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F"
+"IsolatedCommand"="cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F"
+[HKEY_CLASSES_ROOT\exefile\shell\runas2]
+@="管理员取得所有权"
+"NoWorkingDirectory"=""
+[HKEY_CLASSES_ROOT\exefile\shell\runas2\command]
+@="cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F"
+"IsolatedCommand"="cmd.exe /c takeown /f "%1" && icacls "%1" /grant administrators:F"
+[HKEY_CLASSES_ROOT\Directory\shell\runas]
+@="管理员取得所有权"
+"NoWorkingDirectory"=""
+[HKEY_CLASSES_ROOT\Directory\shell\runas\command]
+@="cmd.exe /c takeown /f "%1" /r /d y && icacls "%1" /grant administrators:F /t"
+"IsolatedCommand"="cmd.exe /c takeown /f "%1" /r /d y && icacls "%1" /grant administrators:F /t"
+;
+;----------------------------------------------------------------------------
+;(六)、其他杂项
+;
+;1、设置辅助功能相关项
+[HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys]
+"Flags"="506"    ;取消使用粘滞键
+[HKEY_CURRENT_USER\Control Panel\Accessibility\HighContrast]
+"Flags"="122"
+[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+"Flags"="122"
+[HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys]
+"Flags"="58"
+[HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys]
+"Flags"="58"
+;
+;2、优化 NTFS 性能，禁用更新最近访问日期标记
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem Management]
+"NtfsDisableLastAccessUpdate"=dword:00000001
+"NtfsDisable8dot3NameCreation"=dword:00000001
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem]
+"NtfsDisableLastAccessUpdate"=dword:00000001
+;
+;3、设置预读 - 预读 Windows 系统文件和应用程序
+;
+;"EnablePrefetcher"=dword:00000003 这个值，系统在显示欢迎界面前的时间段最短(古董机1高档机3或4或5)
+;"0"取消预读;"1"只预读应用程序;"2"只预读系统文件;"3"预读系统文件和应用程序(系统默认值)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters]
+"EnablePrefetcher"=dword:00000002
+"EnableSuperfetch"=dword:00000002
+;
+;4、设置“系统失败”选项
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl]
+"LogEvent"=dword:00000000           ;不将事件写入系统日志
+"AutoReboot"=dword:00000000         ;不自动重启动
+"CrashDumpEnabled"=dword:00000000   ;不写入调试信息
+;
+;5、设置记事本
+[HKEY_CURRENT_USER\Software\Microsoft\NotePad]
+"fwrap"=dword:00000001       ;自动换行
+"StatusBar"=dword:00000001   ;显示状态栏
+;
+;6、用记事本打开NFO文件
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo]
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo\OpenWithList]
+"a"="NOTEPAD.EXE"
+"MRUList"="a"
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo\OpenWithProgids]
+"MSInfoFile"=hex(0):
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo\UserChoice]
+"Progid"="Applications\\notepad.exe"
+;
+;7、优化 Windows 声音 和 音频配置
+[HKEY_CURRENT_USER\Control Panel\Sound]
+"Beep"="no" ;〔NO禁止PC在出错时发出声音〕
+"ExtendedSounds"="Yes"
+;
+;9、移除某些驱动(显卡+声卡+摄像头)在安装后生成的启动项
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+;
+;8、清理 WinRAR 的历史文档记录
+[-HKEY_CURRENT_USER\Software\WinRAR\ArcHistory]
+;
+;9、去掉 WinRAR 在右键菜单中添加的“压缩...并 E-Mail”
+[HKEY_CURRENT_USER\SOFTWARE\WinRAR\Setup\MenuItems]
+"EmailArc"=dword:00000000
+"EmailOpt"=dword:00000000
+;
+;10、缩短关机的等待时间，加快关机速度
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"AutoEndTasks"="1"                  ;是否主动结束任务? (1 为 Yes，0 为 No)
+"HungAppTimeout"="3000"             ;系统通知应用程序结束任务，若还有应用程序 3 秒后没有响应，就发出最后通牒 (默认值"5000")
+"MenuShowDelay"="0"                 ;加快开始菜单显示
+"DragFullWindows"="0"               ;拖动窗口不再显示窗口内容
+"WaitToKillAppTimeout"="10000"      ;系统给还没有响应的应用程序最后通牒，1 秒后还不响应就强行结束，并执行关机 (默认值"20000")
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+"WaitToKillServiceTimeout"="5000"   ;关机前，若某个服务在 5 秒 内还没结束，系统就强行关闭之 (默认值"20000")
+;
+;11、自动优化各分区，加快启动速度
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction]
+"Enable"="Y"
+;
+;12、禁用错误报告
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHealth\ErrorReporting]
+"ShowUI"=dword:00000000
+"DoReport"=dword:00000000
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
+"ReportBootOk"="0"                      ;禁止登录后创建成功登录报告功能
+"AutoRestartShell"=dword:00000001       ;开启自动刷新，防止假死
+;
+;13、关闭自动调试提高运行速度
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug]
+"Auto"="0"
+;
+;14、自动优化数据储存，加快软件打开速度
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout]
+"EnableAutoLayout"=dword:00000001
+;
+;15、优化电脑资源配置
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+"Win32PrioritySeparation"=dword:0000001a
+;
+;禁止设备安装驱动时向Windows发送错误报告
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Settings]
+;"DisableSendRequestAdditionalSoftwareToWER"=dword:00000001 ;禁止当设备驱动程序在安装过程中请求附加软件时
+;"DisableSendGenericDriverNotFoundToWER"=dword:00000001     ;禁止在设备上安装通用驱动程序时
+
+;关闭 Windows Update 设备驱动程序搜索提示
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching]
+;"DontPromptForWindowsUpdate"=dword:00000001
+
+;关闭驱动程序验证
+;[HKEY_CURRENT_USER\Software\Microsoft\Driver Signing]
+;"Policy"=dword:00000001
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Driver Signing]
+;"Policy"=hex:01
+;[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows NT\Driver Signing]
+;"BehaviorOnFailedVerify"=dword:00000000  ;忽略设备驱动程序的代码签名
+
+;阻止运行Windows Anytime Upgrade
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\WAU]
+;"Disabled"=dword:00000001
+;
+;16、关闭UAC通知
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
+"UacDisableNotify"=dword:00000001
+
+;Windows Defende
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+;"DisableAntiSpyware"=dword:00000001            ;关闭 Windows Defender 实时保护
+;"DisableRoutinelyTakingAction"=dword:00000001  ;禁用定时进行操作
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-time Protection]
+;"DisableRealtimeMonitoring"=dword:00000001     ;禁用实时监视
+;
+;17、加大USB设备探测间隔
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{36FC9E60-C465-11CF-8056-444553540000}\0000]
+"IdleEnable"=dword:00000001
+;
+;19、性能设置
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
+"LargeSystemCache"=-                     ;关闭大系统缓存
+"ClearPageFileAtShutdown"=dword:00000000 ;取消关机时不必要的虚拟内存
+"IoPageLockLimit"=dword:08000000         ;优化内存配置〔内存1G以上用户开启最佳〕
+"DisablePagingExecutive"=dword:00000001  ;禁用页面文件〔内存1G以上用户开启最佳〕
+;----------------------------------------------------------------------------
+;
+;(七)开始菜单设置模块
+;
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_AdminToolsRoot"=dword:00000002        ;开始菜单显示管理工具
+"Start_ShowRun"=dword:00000001               ;开始菜单显示运行
+"Start_NotifyNewApps"=dword:00000000         ;禁止高亮显示新安装的程序
+"ExtendedUIHoverTime"=dword:00000000         ;加快Aero Snap显示速度  
+"DesktopLivePreviewHoverTime"=dword:00000000 ;加快Aero peek显示速度
+;"StartMenuAdminTools"=dword:00000000        ;禁止在所有程序中显示管理工具
+;"TaskbarSmallIcons"=dword:00000001          ;任务栏使用小图标
+;"TaskbarGlomLevel"=dword:00000002           ;任务栏按钮从不合并
+;"Start_ShowHelp"=dword:00000000             ;开始菜单不显示帮助和支持
+;"Start_LargeMFUIcons"=dword:00000000        ;禁止开始菜单使用大图标
+;
+;2、取消游戏里“下载有关已安装游戏的技巧和信息”和“收集最近玩过的游戏信息”
+[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\GameUX]
+"FirstRunDialogLaunched"=dword:00000001
+"DownLoadGameInfo"=dword:00000000
+"ListRecentlyPlayed"=dword:00000000
+;
+;-------------------------------------------------------------------------------------------------------------
+;
+;(八)Windows Media Player设置
+
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsMediaPlayer]
+;"GroupPrivacyAcceptance"=dword:00000001 ;不显示首次使用对话框
+;"DisableAutoUpdate"=dword:00000001      ;防止WMP自动更新
+;"EnableScreenSaver"=dword:00000001      ;播放WMP时关闭屏保
+;"PreventLibrarySharing"=dword:00000001  ;防止媒体共享
+
+;(九)、Messenge设置模块
+
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Messenger\Client]
+;"PreventAutoRun"=dword:00000001  ;初始化时不自动启动Windows Messenger
+;"PreventRun"=dword:00000001      ;不允许运行Windows Messenger
+;-------------------------------------------------------------------------------------------------------------
+;
+;服务优化 for --< 追风少年-系统优化方案 for Windows 7/Server 2008 >--
+;
+;个人用户装机版
+;
+;更新时间：2012.6.12
+;
+;使用说明：服务优化 < 个人用户装机版 > 是针对个人用户定制的、优化“度”适中的方案，是个人用户部署系统的首选服务优化方案。不熟悉系统服务的用户，我们推荐你直接将本方案导入系统，双击此 Reg 文件，“确定”即可；熟悉系统服务的用户，你可以根据以下说明来更改服务设置状态来进行个性化定制。
+;
+;dword:00000002 表示设置为“自动”
+;dword:00000003 表示设置为“手动”
+;dword:00000004 表示设置为“禁用”
+;"DelayedAutoStart"=dword:00000001 表示设置为“延迟-自动专用”
+;注：我没有加DelayedAutoStart的说明无法延迟启动
+
+;Windows Update 自动更新服务
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\wuauserv]
+"Start"=dword:00000002
+"DelayedAutoStart"=dword:00000001
+
+;IPsec Policy Agent IP 安全策略服务，建议企业用户维持系统默认值
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PolicyAgent]
+"Start"=dword:00000004
+;"DelayedAutoStart"=dword:00000001
+
+;Offline Files 脱机服务
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\CscService]
+"Start"=dword:00000003
+
+;Remote Registry 远程修改计算机
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\RemoteRegistry]
+"Start"=dword:00000004
+;"DelayedAutoStart"=dword:00000001
+
+;Windows Font Cache Service 字体缓存 本人其实建议开启
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\FontCache]
+"Start"=dword:00000003
+;"DelayedAutoStart"=dword:00000001
+
+;Secondary Logon 二次登录
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\seclogon]
+"Start"=dword:00000004
+;"DelayedAutoStart"=dword:00000001
+
+;WebClient Web 客户端服务
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\WebClient]
+"Start"=dword:00000003
+
+;Security Center 安全中心
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\wscsvc]
+"Start"=dword:00000004
+;"DelayedAutoStart"=dword:00000001
+
+;Windows Firewall Windows 防火墙
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\MpsSvc]
+"Start"=dword:00000004
+
+;Windows Search 索引服务
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\WSearch]
+"Start"=dword:00000003
+;"DelayedAutoStart"=dword:00000001
+
+;Windows Error Reporting Service 关闭微软错误报告
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\WerSvc]
+"Start"=dword:00000004
+
+;Function Discovery 〔资源发布服务〕
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\FDResPub]
+"Start"=dword:00000003
+
+;----------------------------------------------------------------------------
+;以下供参考，已经注释掉。
+;
+;打印服务，如果不使用打印机，可以禁用，但不推荐
+;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Spooler]
+;"Start"=dword:00000004
+;后记：Win7注册表和服务的优化和XP有出入，特别是服务项的导入有时候不能导入是因为变态的保护权限阻止所导致。
+另外有FileSystem、CurrentControlSet类似的注册表要注意它们的副值ControlSet001，因为某些特定的项页需要同步
+导入副值才可以生效！
+;----------------------------------------------------------------------------
+;追风少年
+;zfsn.reg            
+;                     
+;zfsn 整理      
+;     
+;感谢 系统总裁全体会员 的大力支持；
+;感谢 网络上为优化系统而作出过探索和贡献的朋友们。   
+;复制代码
