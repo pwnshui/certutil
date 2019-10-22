@@ -696,6 +696,8 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AFD\Parameters] 
 "BufferMultiplier"=dword:00000400
 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\fipsalgorithmpolicy]
+"Enabled"=dword:00000000
 
 ;---------------------------------------------------------------------------------------------------------------------------
 ; Increase RPC Packet Size
