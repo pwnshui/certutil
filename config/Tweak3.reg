@@ -1,0 +1,1151 @@
+Windows Registry Editor Version 5.00
+
+;---------------------------------------------
+;eXPerience Windows 7 Registry Tweaks (C) 2011
+;---------------------------------------------
+
+;###############################################################################################
+;# #
+;# APPEARANCE #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show Windows classic folders (File | Edit | View | Tools | Help)
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"AlwaysShowMenus"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable grouping of system tray icons
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarGlomming"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"EnableAutoTray"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove the "Details Pane" from the bottom of Explorer windows
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Modules\GlobalSettings\Sizer]
+"PreviewPaneSizer"=hex:51,00,00,00,00,00,00,00,00,00,00,00
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Unlock the taskbar
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarSizeMove"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show file extensions
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"HideFileExt"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show detailed Device settings in device manager
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment]
+"DEVMGR_SHOW_DETAILS"="1"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel]
+"{20D04FE0-3AEA-1069-A2D8-08002B30309D}"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show hidden files and folders (not hidden system files and folders)
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Hidden"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show all hidden devices in device manager
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment]
+"DEVMGR_SHOW_NONPRESENT_DEVICES"=1
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove " - Shortcut" Suffix from shortcuts
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"link"=hex:00,00,00,00
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Cleartype
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"FontSmoothing"="2"
+"FontSmoothingType"=dword:00000002
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Set Control Panel on Classic View and small icons
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel]
+"AllItemsIconView"=dword:00000001
+"StartupPage"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Use Small Icons
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\SmallIcons]
+"SmallIcons"="yes"
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Display drive letters
+; 0 = windows default
+; 1 = only network drive's letters shown.
+; 2 = no drive letters shown
+; 4 = all drive letters shown
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"ShowDriveLettersFirst"=dword:00000004
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Cache more Icons
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"Max Cached Icons"="4096"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show the full path in minimized explorer windows
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
+"FullPath"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Make the text white in command windows
+
+[HKEY_CURRENT_USER\Software\Microsoft\Command Processor]
+"DefaultColor"=dword:0000000F
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable window animations on minimize/maximize
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DWM]
+"Animations"=dword:00000000
+
+
+;###############################################################################################
+;# #
+;# CONTEXT MENU #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "Take Ownership" to right click of all files and folders
+
+[HKEY_CLASSES_ROOT\*\shell\runas]
+@="Take Ownership"
+"NoWorkingDirectory"=""
+
+[HKEY_CLASSES_ROOT\*\shell\runas\command]
+@="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F"
+
+[HKEY_CLASSES_ROOT\Directory\shell\runas]
+@="Take Ownership"
+"NoWorkingDirectory"=""
+
+[HKEY_CLASSES_ROOT\Directory\shell\runas\command]
+@="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /t"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /t"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show Encryption Commands on the Shortcut Menu
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"EncryptionContextMenu"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable file association web-service - Bypassing "Browse web for program" to open unknown extension.
+; "Open With..." becomes default
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"NoInternetOpenWith"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "Command Prompt" when you right click a folder
+
+[HKEY_CLASSES_ROOT\Folder\shell\Command Prompt]
+
+[HKEY_CLASSES_ROOT\Folder\shell\Command Prompt\command]
+@="cmd.exe /k pushd %L"
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add 'Copy to Folder' and 'Move to Folder' to right click
+
+[HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\{C2FBB630-2971-11D1-A18C-00C04FD75D13}]
+
+[HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\{C2FBB631-2971-11D1-A18C-00C04FD75D13}]
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Underline letters on right click (EG "R" for Properties, "D" for Delete)
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"UserPreferencesMask"=hex:b0,12,01,80
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "Device Manager" to the right click menu of "Computer"
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Devices]
+@=hex(2):44,00,65,00,76,00,69,00,63,00,65,00,20,00,4d,00,61,00,6e,00,61,00,67,\
+00,65,00,72,00,00,00
+"SuppressionPolicy"=dword:4000003c
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Devices\command]
+@=hex(2):25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,00,5c,00,73,00,79,00,73,\
+00,74,00,65,00,6d,00,33,00,32,00,5c,00,6d,00,6d,00,63,00,2e,00,65,00,78,00,\
+65,00,20,00,2f,00,73,00,20,00,25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,\
+00,6f,00,6f,00,74,00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,\
+32,00,5c,00,64,00,65,00,76,00,6d,00,67,00,6d,00,74,00,2e,00,6d,00,73,00,63,\
+00,20,00,2f,00,73,00,00,00
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "Services" to the right click menu of "Computer"
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\services]
+@=hex(2):53,00,65,00,72,00,76,00,69,00,63,00,65,00,73,00,00,00
+"SuppressionPolicy"=dword:4000003c
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\services\command]
+@=hex(2):25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,00,5c,00,73,00,79,00,73, 00,74,00,65,00,6d,00,33,00,32,00,5c,00,6d,00,6d,00,63,00,2e,00,65,00,78,00, 65,00,20,00,2f,00,73,00,20,00,25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52, 00,6f,00,6f,00,74,00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00, 32,00,5c,00,73,00,65,00,72,00,76,00,69,00,63,00,65,00,73,00,2e,00,6d,00,73, 00,63,00,20,00,2f,00,73,00,00,00
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "Edit Registry" to the right click menu of "Computer"
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Edit Registry]
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Edit Registry\command]
+@="regedit.exe"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "MSCONFIG" to the right click menu of "Computer"
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\msconfig]
+@="MSCONFIG"
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\msconfig\command]
+@="msconfig.exe"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add "Advanced System Properties" to the right click menu of "Computer"
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\AdvSysProp]
+@=hex(2):41,00,64,00,76,00,61,00,6e,00,63,00,65,00,64,00,20,00,53,00,79,00,73,\
+00,74,00,65,00,6d,00,20,00,50,00,72,00,6f,00,70,00,65,00,72,00,74,00,69,00,\
+65,00,73,00,00,00
+
+[HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\AdvSysProp\command]
+@=hex(2):63,00,6f,00,6e,00,74,00,72,00,6f,00,6c,00,20,00,73,00,79,00,73,00,64,\
+00,6d,00,2e,00,63,00,70,00,6c,00,00,00
+
+
+;###############################################################################################
+;# #
+;# GENERAL SETTINGS #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; If an Administrator attempts a protected action - Silently Succeed
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"ConsentPromptBehaviorAdmin"=dword:00000000
+
+
+;----------------------------------------------------------------------------------------------------------------------------
+; Add Notepad as a Right Click Item
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\Notepad]
+@="Notepad"
+
+
+;----------------------------------------------------------------------------------------------------------------------------
+; Disable Tracking of Broken Shortcut Links
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"NoResolveTrack"=dword:00000001
+
+
+;----------------------------------------------------------------------------------------------------------------------------
+; Windows will tell you exactly what it is doing when it is shutting down or is booting
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\system]
+"verbosestatus"=dword:00000001
+
+
+;----------------------------------------------------------------------------------------------------------------------------
+; Search All File Types
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ContentIndex]
+"FilterFilesWithUnknownExtensions"=dword:00000001
+
+
+;----------------------------------------------------------------------------------------------------------------------------
+; Make the Windows registration with Microsoft unnecessary
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion]
+"RegDone"="1"
+
+
+;----------------------------------------------------------------------------------------------------------------------------
+; Disable the Windows Mail splash screen
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows Mail]
+"NoSplash"=dword:00000001
+
+
+;###############################################################################################
+;# #
+;# IE8 #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Unlock IE8 toolbars
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Toolbar]
+"Locked"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Do not notify when downloads complete
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"NotifyDownloadComplete"="no"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Gets rid of annoying popup for running files you download from internet
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Download]
+"CheckExeSignatures"="no"
+"RunInvalidSignatures"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Add Government and Military to auto url searches
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main\UrlTemplate]
+"5"="www.%s.gov"
+"6"="www.%s.mil"
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Set Google.com as homepage
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Start Page"="http://www.google.com/"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Save session on exit
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Save_Session_History_On_Exit"="yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Disable 'Send information to the Internet' prompt
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3]
+"1601"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Disable Internet Explorer Cookie 'Privacy Icon' prompt
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"PrivDiscUiShown"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Disable Internet Explorer 'Auto-Complete' prompt
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\IntelliForms]
+"AskUser"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Increase Simultaneous Downloads
+
+[HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"MaxConnectionsPerServer"=dword:00000014
+"MaxConnectionsPer1_0Server"=dword:00000014
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"MaxConnectionsPerServer"=dword:00000014
+"MaxConnectionsPer1_0Server"=dword:00000014
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Disable script debugging in applications using IE
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"DisableScriptDebuggerIE"="yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Do not display a notification about every script error
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Error Dlg Displayed On Every Error"="no"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Enable page transitions
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Page_Transitions"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Enable personalized favourites menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"FavIntelliMenus"="NO"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Enable visual styles on buttons and controls in web pages
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"UseThemes"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Show friendly HTTP error messages
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Friendly http errors"="yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Use Smooth Scrolling
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"SmoothScroll"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Enable automatic image resizing
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Enable AutoImageResize"="yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Show image download placeholders
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Show image placeholders"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Use http 1.1 through proxy settings
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"ProxyHttp1.1"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Warn about invalid site certificates
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"WarnonBadCertRecving"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Disable FTP folder view (for faster browsing)
+
+[HKEY_CURRENT_USER\Software\Microsoft\Ftp]
+"Use Web Based FTP"="yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Show friendly/Full URL
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Show_FullURL"="yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Smart image dithering
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer]
+"SmartDithering"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - Disallow spying by web-sites
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\ProtocolDefaults]
+"about"=dword:00000004
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; IE8 - IE toolbar layout (small icons, no text)
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Toolbar]
+"ShowDiscussionButton"="no"
+
+
+;###############################################################################################
+;# #
+;# NETWORK #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Use SSL 2.0 (Checked) + SSL 3.0 (Checked) + TSL 1.0 (unchecked)
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"SecureProtocols"=dword:00000028
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not save encrypted pages to disk
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"DisableCachingOfSSLPages"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Check for server certificate revocation
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings]
+"CertificateRevocation"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Stop caching negative responses
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters]
+"MaxNegativeCacheTtl "=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Force keep positive entries in DNS Cache for only 4 hours instead of the default 24 hours
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters]
+"MaxCacheTtl "=dword:00003840
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Increase Network Throughput
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanworkstation\parameters]
+"MaxCmds"=dword:00000064
+"MaxThreads"=dword:00000064
+"MaxCollectionCount"=dword:00000064
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AFD\Parameters]
+"BufferMultiplier"=dword:00000400
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Increase RPC Packet Size
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Rpc]
+"MaxRpcSize"=dword:00100000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Mount net-drives first, when they are needed
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\NetworkProvider]
+"RestoreConnection"=dword:00000000
+
+
+;###############################################################################################
+;# #
+;# SECURITY #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable Default Hidden Shares - This keeps Windows from creating the Admin$, C$, etc. shares
+; (which are security holes) automatically on start-up.
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\parameters]
+"AutoShareWks"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters]
+"AutoShareServer"=dword:00000000
+
+
+;###############################################################################################
+;# #
+;# DISABLED SERVICES FOR SPEED AND SECURITY #
+;# #
+;###############################################################################################
+
+; 00000002 = Automatic Startup (Service starts with Windows)
+;
+; 00000003 = Manual Startup (Service only starts when called upon by a program requiring the service)
+;
+; 00000004 = Disabled (Service never starts, unless changed to Manual or Automatic)
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remote Registry
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry]
+"Start"=dword:00000004
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Windows Error Reporting Service...
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WerSvc]
+"Start"=dword:00000004
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Windows Search
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch]
+"Start"=dword:00000004
+
+
+;###############################################################################################
+;# #
+;# START MENU #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove 'Recent Items' from Start Menu
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowRecentDocs"=dword:00000000
+"Start_TrackDocs"=dword:00000000
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\explorer\RecentDocs]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Modules\GlobalSettings\Sizer]
+"PageSpaceControlSizer"=hex:d0,00,00,00,00,00,00,00,00,00,00,00
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not 'Use large icons' on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_LargeMFUIcons"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show 'Search the Internet' on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_SearchInternet"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show 'Search' on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowSearch"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show 'Default Programs' on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowSetProgramAccessAndDefaults"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show 'Games' on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowMyGames"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show 'Help and Support' on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowHelp"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show "My Music" on Start Menu
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"Start_ShowMyMusic"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowMyMusic"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not show "Devices and Printers" on Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_AdminToolsTemp"=dword:00000000
+"Start_ShowPrinters"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Show "Administrative Tools" on the Start Menu
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_AdminToolsRoot"=dword:00000001
+
+
+;###############################################################################################
+;# #
+;# SYSTEM #
+;# #
+;###############################################################################################
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Typing Long File Names In DOS
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Command Processor]
+"CompletionChar"=dword:00000009
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Turn off system beeps
+
+[HKEY_CURRENT_USER\Control Panel\Sound]
+"beep"="no"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove new BMP file
+
+[-HKEY_CLASSES_ROOT\.bmp\ShellNew]
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; This adds an option in the right-click menu to open any folder on your computer in a new window
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\openNew]
+@="Open In New &Window"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\openNew\Command]
+@="explorer %1"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable screensavers
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"ScreenSaveActive"="0"
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"SCRNSAVE.EXE"=""
+[HKEY_USERS\.DEFAULT\Control Panel\Desktop]
+"ScreenSaveActive"="0"
+[HKEY_USERS\.DEFAULT\Control Panel\Desktop]
+"SCRNSAVE.EXE"=""
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable kernel paging
+; Optimize Core System Performance
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
+"DisablePagingExecutive"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Change the Clock to 24 Hour time format
+
+[HKEY_CURRENT_USER\Control Panel\International]
+"iTime"="1"
+"iTLZero"="0"
+"sTime"=":"
+"sTimeFormat"="H:mm:ss"
+"iTimePrefix"="0"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Allow renaming and removing of Recycle Bin
+
+[HKEY_CLASSES_ROOT\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\ShellFolder]
+"Attributes"=hex:70,10,00,20
+"CallForAttributes"=dword:00000040
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; All items have an "edit.." on right-click sending to notepad
+
+[HKEY_CLASSES_ROOT\*\shell\open]
+@="Edit.."
+[HKEY_CLASSES_ROOT\*\shell\open\command]
+@="notepad.exe %1"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add register / unregister to the context menu for .ocx files
+
+[HKEY_CLASSES_ROOT\.ocx]
+@="ocxfile"
+[HKEY_CLASSES_ROOT\ocxfile]
+@="OCX"
+[HKEY_CLASSES_ROOT\ocxfile\Shell\Register\command]
+@="regsvr32.exe \"%1\""
+[HKEY_CLASSES_ROOT\ocxfile\Shell\UnRegister\command]
+@="regsvr32.exe /u \"%1\""
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add register / unregister to the context menu for .dll files
+
+[HKEY_CLASSES_ROOT\.dll]
+"Content Type"="application/x-msdownload"
+@="dllfile"
+[HKEY_CLASSES_ROOT\dllfile]
+@="Application Extension"
+[HKEY_CLASSES_ROOT\dllfile\Shell\Register\command]
+@="regsvr32.exe \"%1\""
+[HKEY_CLASSES_ROOT\dllfile\Shell\UnRegister\command]
+@="regsvr32.exe /u \"%1\""
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Opens 16-bit apps in a separate memory space
+; This increases stability when dealing with 16-bit apps.
+; (No = disabled, Yes = enabled)
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WOW]
+"DefaultSeparateVDM"="Yes"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Notepad saves window position
+
+[HKEY_CURRENT_USER\Software\Microsoft\Notepad]
+"fSaveWindowPositions"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Makes a right click option for unknown files (Open with notepad)
+
+[HKEY_CLASSES_ROOT\*\shell]
+@="\"notepad.exe %1\""
+[HKEY_CLASSES_ROOT\*\shell\open]
+@="Open &With Notepad"
+[HKEY_CLASSES_ROOT\*\shell\open\command]
+@="notepad.exe %1"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Add new CMD file to right click > New
+
+[HKEY_CLASSES_ROOT\.cmd\ShellNew]
+"NullFile"=""
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable 'Windows Defender' startup
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+"Windows Defender"=-
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Enable Status bar in Notepad
+
+[HKEY_CURRENT_USER\Software\Microsoft\Notepad]
+"StatusBar"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Enable Status Bar in all windows
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"StatusBarOther"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Enable search system folders in Search
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Search\Preferences]
+"SystemFolders"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Kill hung services after 5 seconds
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+"WaitToKillServiceTimeout"="5000"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Open NFO files with notepad
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo\OpenWithList]
+"a"="NOTEPAD.EXE"
+"MRUList"="a"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo\OpenWithProgids]
+"MSInfoFile"=hex(0):
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.nfo\UserChoice]
+"Progid"="Applications\\notepad.exe"
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Open HTA files (used for WPI) with MSHTA.EXE
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta\OpenWithList]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.hta\OpenWithProgids]
+"htafile"=hex(0):
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove the annoying clicking sound
+
+[HKEY_CURRENT_USER\AppEvents\Schemes\Apps\Explorer\Navigating\.Current]
+@=""
+
+[HKEY_CURRENT_USER\AppEvents\Schemes\Apps\Explorer\Navigating\.Default]
+@=""
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove warning about showing hidden system folders
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\SuperHidden]
+"WarningIfNotDefault"=-
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Restore previous folder windows at logon
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"PersistBrowsers"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Speed up shell response
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"MenuShowDelay"="50"
+
+[HKEY_USERS\S-1-5-19\Control Panel\Desktop]
+"MenuShowDelay"="50"
+
+[HKEY_USERS\S-1-5-20\Control Panel\Desktop]
+"MenuShowDelay"="50"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_ShowRun"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Stops the 'Welcome Center' loading (for current user) when Windows starts
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"WindowsWelcomeCenter"=-
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable User Accounts Control (UAC)
+; (Stops the annoying 'are you sure' warnings when you run executable files)
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"EnableLUA"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable automatic restart in the event of a blue screen
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl]
+"AutoReboot"=dword:00000000
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Disable Automatic Updates (not the ability to update - just
+; disables the automatic background updates and balloon tips)
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update]
+"AUOptions"=dword:00000001
+"IncludeRecommendedUpdates"=dword:00000000
+"SetupWizardLaunchTime"=-
+"BalloonTime"=-
+"BalloonType"=-
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Stop Windows Sidebar starting with Windows
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"Sidebar"=-
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Fix for compatibility with older versions of "Windows Post Install Wizard" (WPI)
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup]
+"SourcePath"=""
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Small icons on the Taskbar
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarSmallIcons"=dword:00000001
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove blank icon from desktop
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{98D99750-0B8A-4c59-9151-589053683D73}]
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Do not allow Windows to turn off Network Adapters
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0000]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0001]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0002]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0003]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0004]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0005]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0006]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0007]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0008]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0009]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0010]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0011]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0012]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0013]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0014]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0015]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0016]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0017]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0018]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0019]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0020]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0021]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0022]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0023]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0024]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0025]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0026]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0027]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0028]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0029]
+"PnPCapabilities"=dword:00000018
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002BE10318}\0030]
+"PnPCapabilities"=dword:00000018
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Remove Explorer, IE8 and WMP12 icons from the Taskbar
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage2]
+"ProgramsCacheTBP"=hex:01,00,00,00,09,00,00,00,02,
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband]
+"Favorites"=hex:ff,
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband]
+"FavoritesChanges"=dword:00000009
+
+
+;---------------------------------------------------------------------------------------------------------------------------
+; Gadgets Fix (thanks to r0manian)
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Sidebar]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Sidebar\Compatibility]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Sidebar\Settings]
+
+
+;===========================================================================================================================
+;======================================================= END ===============================================================
+;===========================================================================================================================
+
+;---------------------------------------------
+;eXPerience Windows 7 Registry Tweaks (C) 2011
+;---------------------------------------------
