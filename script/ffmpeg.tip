@@ -1,0 +1,34 @@
+ffmpeg -i hls-480p1.ts -vf "transpose=1,scale=ih:iw" hls-480p14.ts
+ffmpeg -y -i hls-480p1.ts -crf 1 -vf "transpose=1,scale=ih*2:iw*2:flags=lanczos,minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1'" -preset veryslow  hls-480p15.ts
+ffmpeg -y -hwaccel nvdec -hwaccel_output_format cuda -i hls-480p2.ts -c:v h264_nvenc -vf "hwdownload,format=nv12,transpose=1,scale=ih*2:iw*2:flags=lanczos,minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1'"  hls-480p25.ts
+ffmpeg -i "concat:hls-480p1 (1).ts|hls-480p2 (1).ts" -crf 1 -vf "transpose=1,scale=ih*2:iw*2:flags=lanczos,minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1'" hls2.mp4
+
+
+[Template of ffmpeg hwaccel]
+ffmpeg -y -hwaccel nvdec -hwaccel_output_format cuda -c:v h264_nvenc -vf "hwdownload,format=nv12,.....
+""not work with -crf because codec isn't support parameters""
+
+[video rotate]
+transpose=1 2 3
+
+[video resize]
+orig=1280x722
+scale=720:-1(=361)
+scale=720:-2(=360)
+scale=ih:iw(722x1280)
+scale=ih*2:iw*2:flags=lanczos (video size upscaling)
+
+[video fps]
+minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1' - veryslow but compensates motions.
+no effect with hwaccel... 
+
+[audio 1/16 octave up]
+atempo=15/16,asetrate=44100*16/15
+
+
+*notice
+-vf overlay forces framerate into 25fps!! AFTER explicitly set -r 50 to fix this.
+
+
+
+
