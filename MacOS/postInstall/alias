@@ -1,0 +1,11 @@
+alias e='exit'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias q='exit'
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+
+function efiMount() {
+	sudo mkdir /Volumes/EFI1
+	sudo mount -t msdos -o rw /dev/disk$1s1 /Volumes/EFI1
+}
+
+
