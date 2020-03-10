@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Init
-
+df -h
 resize2fs /dev/mmcblk0p2
 passwd root
 apt update
@@ -22,11 +22,10 @@ ifconfig
 curl -GLk "https://pastebin.com/raw/vTMsE6Zq" -o /etc/motd
 
 #apt, make sure connecting Internet
-apt update
 apt-get remove -y apache2 xfce4 xfwm4
 apt-get remove -y network-manager network-manager-gnome
 apt-get -y autoremove
-apt install hostapd dnsmasq dhcpcd5 vim-nox emacs-nox
+apt install -y hostapd dnsmasq vim-nox emacs-nox
 
 #lightdm - autologin
 useradd -m user -G sudo -s /bin/bash
@@ -39,7 +38,7 @@ EOT
 echo "#Triple comment to auth required pam_succeed_if.so user !=..." \
        	>> /etc/pam.d/lightdm-autologin
 #EOT
-
+vim /etc/pam.d/lightdm-autologin
 
 # Wireless Pi, use wlan as internal router
 
@@ -127,17 +126,34 @@ vim /etc/systemd/system/wpa_supplicant.service
 systemctl enable wpa_supplicant.service
 
 cat <<EOT >> /etc/systemd/system/dhclient.service
-# ExecStart=/sbin/dhclient wlan1 -v
-# ExecStop=/sbin/dhclient wlan1 -r
+
+[Unit]
+Description=dhclient for sending DUID IPv6
+Wants=network.target
+Before=network.target
+
+
+[Service]
+Type=forking
+ExecStart=/sbin/dhclient wlan1 -v
+ExecStop=/sbin/dhclient wlan1 -r
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
+
 EOT
-vim /etc/systemd/system/dhclient.service
+# vim /etc/systemd/system/dhclient.service
 systemctl enable dhclient.service
 
 # hostapd problem - masked by default
 
+systemctl unmask hostapd
 update-rc.d hostapd defaults
 update-rc.d hostapd enable
-systemctl unmask hostapd
 systemctl enable hostapd
 systemctl start hostapd
 
