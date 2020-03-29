@@ -96,8 +96,10 @@ EOT
 chmod 644 /etc/hostapd/hostapd.conf
 
 echo 'DAEMON_CONF="/etc/hostapd/hostapd.conf"' >> /etc/default/hostapd
-echo '#Change DAEMON_CONF=/etc/hostapd/hostapd.conf' >> /etc/init.d/hostapd
-vim /etc/init.d/hostapd
+#echo '#Change DAEMON_CONF=/etc/hostapd/hostapd.conf' >> /etc/init.d/hostapd
+#vim /etc/init.d/hostapd
+
+
 
 # dnsmasq.conf
 
@@ -112,6 +114,7 @@ bogus-priv
 dhcp-range=192.168.220.50,192.168.220.70,24h
 EOT
 
+sysctl -w net.ipv4.ip_forward=1
 echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 
