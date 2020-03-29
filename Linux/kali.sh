@@ -25,7 +25,7 @@ curl -GLk "https://pastebin.com/raw/vTMsE6Zq" -o /etc/motd
 apt-get remove -y apache2 xfce4 xfwm4
 apt-get remove -y network-manager network-manager-gnome
 apt-get -y autoremove
-apt install -y hostapd dnsmasq vim-nox emacs-nox
+apt install -y hostapd dnsmasq vim-nox emacs-nox dhcpd
 
 #lightdm - autologin
 useradd -m user -G sudo -s /bin/bash
@@ -96,8 +96,8 @@ EOT
 chmod 644 /etc/hostapd/hostapd.conf
 
 echo 'DAEMON_CONF="/etc/hostapd/hostapd.conf"' >> /etc/default/hostapd
-#echo '#Change DAEMON_CONF=/etc/hostapd/hostapd.conf' >> /etc/init.d/hostapd
-#vim /etc/init.d/hostapd
+echo '#Change DAEMON_CONF=/etc/hostapd/hostapd.conf' >> /etc/init.d/hostapd
+vim /etc/init.d/hostapd
 
 
 
