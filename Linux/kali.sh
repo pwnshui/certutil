@@ -92,7 +92,7 @@ auth_algs=1
 ignore_broadcast_ssid=0
 wpa=2
 wpa_key_mgmt=WPA-PSK
-wpa_passphrase=HYU-wlan
+wpa_passphrase=aaa
 rsn_pairwise=CCMP
 EOT
 chmod 644 /etc/hostapd/hostapd.conf
@@ -113,12 +113,16 @@ bind-interfaces
 server=8.8.8.8
 domain-needed
 bogus-priv
-dhcp-range=192.168.0.2,192.168.220.200,24h
+dhcp-range=192.168.0.2,192.168.0.200,24h
 EOT
 
 sysctl -w net.ipv4.ip_forward=1
 echo net.ipv4.ip_forward=1 >> /etc/sysctl.conf
 sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE
+iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT
 
 
 # Due to kernal error Cannot enable eth to wlan0
