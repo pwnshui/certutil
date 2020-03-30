@@ -68,6 +68,7 @@ broadcast 192.168.200.255
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 iface default inet dhcp
+up iptables-restore < /etc/iptables.ipv4.nat
 EOT
 
 chmod 644 /etc/network/interfaces
