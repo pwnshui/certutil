@@ -25,7 +25,8 @@ curl -GLk "https://pastebin.com/raw/vTMsE6Zq" -o /etc/motd
 apt-get remove -y apache2 xfce4 xfwm4
 apt-get remove -y network-manager network-manager-gnome
 apt-get -y autoremove
-apt install -y hostapd dnsmasq vim-nox emacs-nox dhcpd
+apt install -y hostapd dnsmasq vim dhcpd
+# apt install emacs
 
 #lightdm - autologin
 useradd -m user -G sudo -s /bin/bash
@@ -106,12 +107,12 @@ vim /etc/init.d/hostapd
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 cat <<EOT > /etc/dnsmasq.conf
 interface=wlan0
-listen-address=192.168.220.1
+listen-address=192.168.0.1
 bind-interfaces
 server=8.8.8.8
 domain-needed
 bogus-priv
-dhcp-range=192.168.220.50,192.168.220.70,24h
+dhcp-range=192.168.0.2,192.168.220.200,24h
 EOT
 
 sysctl -w net.ipv4.ip_forward=1
@@ -127,6 +128,8 @@ cp /lib/systemd/system/wpa_supplicant.service /etc/systemd/system/wpa_supplicant
 echo '#change ExecStart=/sbin/wpa_supplicant -u -s -c /etc/wpa_supplicant.conf -i wlan1'
 vim /etc/systemd/system/wpa_supplicant.service
 systemctl enable wpa_supplicant.service
+
+#Biggest problem!!!!!!!!!
 
 cat <<EOT >> /etc/systemd/system/dhclient.service
 
