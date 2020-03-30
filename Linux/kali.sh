@@ -25,7 +25,7 @@ curl -GLk "https://pastebin.com/raw/vTMsE6Zq" -o /etc/motd
 apt-get remove -y apache2 xfce4 xfwm4
 apt-get remove -y network-manager network-manager-gnome
 apt-get -y autoremove
-apt install -y hostapd dnsmasq vim dhcpd
+apt install -y hostapd dnsmasq vim dhcpcd5
 # apt install emacs
 
 #lightdm - autologin
