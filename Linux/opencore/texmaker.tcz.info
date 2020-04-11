@@ -1,0 +1,39 @@
+Title:          texmaker.tcz
+Description:    Free cross-platform LaTeX editor (TESTING)
+Version:        2.1
+Author:         Pascal Brachet
+Original-site:  http://www.xm1math.net/texmaker/
+Copying-policy: GPLv2 or later
+Size:		3.9M
+Extension_by:   Jakob Bysewski
+Tags:	    Free cross-platform LaTeX editor 
+Comments:	----------------------------------------------
+		Needs LaTeX in path.
+	
+		Extensions needed to compile:
+		compiletc
+		qt-4.x-dev		
+		qt-4.x-webkit
+		poppler-qt4-dev
+		
+		HowTo-Compile:
+		- Download
+		- extract
+
+		Change texmaker.pro:180 to
+		INCLUDEPATH  += /usr/local/include/poppler/qt4
+		because our prefix is /usr/local.
+
+                qmake -unix PREFIX=/usr/local DESKTOPDIR=/usr/share/applications ICONDIR=/usr/share/pixmaps texmaker.pro
+		make
+		
+		Because texmaker is using qmake, we install it to a dest dir like this:
+		make INSTALL_ROOT=/tmp/package/ install
+
+		After that standard TinyCore packaging applies.		
+		----------------------------------------------	
+		This extension is PPI compatible.			
+Change-log:     2010/11/18 Original
+Current:	2010/11/18 Original
+
+

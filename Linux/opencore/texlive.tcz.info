@@ -1,0 +1,18 @@
+Title:		texlive.tcz
+Description:	TeX-based typesetting/document preparation systems, markup languages and related packages
+Version:	20120701
+Author:		Donald Knuth, Michael Plass, John Hobby, Leslie Lamport, Sebastian Rahtz, Karl Berry, the TeX Users Group and others
+Original-site:	http://www.tug.org/texlive/
+Copying-policy:	LPPL and GPL2
+Size:		20M
+Extension_by:	Marco B. Caminati (caminati.net.tf)
+Tags:		typesetting/document preparation systems, markup languages TeX LaTeX LuaTeX pdf dvi text print format
+Comments:	Includes collection-basic and collection-latex
+		Can be extended via other texlive-*.tcz and texlive-*.scm files in the repo.
+		Built under Core version 4.7.5 from 
+		f604593b7f1a888d480e40b85cf26ed5  texlive2012-20120701.iso
+		available on Original-site.
+		
+		
+Change-log:     2012/01/18 Packaged i386-linux 20120118 under Core Linux 4.0.1 by Xianwen Chen
+Current:	2013/05/01 version 20120701
