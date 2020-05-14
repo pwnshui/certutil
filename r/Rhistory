@@ -1,0 +1,59 @@
+library(gapminder)
+library(dplyr)
+glimpse(gapminder)
+gapminder[,c('country',lifeExp')]
+'
+gapminder[,c('country','lifeExp')]
+gapminder[,c('country','lifeExp','year')]
+gapminder[1:15,c('country','lifeExp','year')]
+gapminder[1:15]
+gapminder[1:15,]
+gapminder[gapminder$country=='Croatia',]
+gapminder[gapminder$country=='Croatia','pop']
+str(gapminder[gapminder$country=='Croatia','pop'])
+str(gapminder[gapminder$country=='Croatia','lifeExp','pop'])
+str(gapminder[gapminder$country=='Croatia',c('lifeExp','pop')])
+str(gapminder[gapminder$country=='Croatia'&gapminder$year>1990,c('lifeExp','pop')])
+(gapminder[gapminder$country=='Croatia'&gapminder$year>1990,c('lifeExp','pop')])
+(gapminder[gapminder$country=='Croatia'|gapminder$year>1990,c('lifeExp','pop')])
+(gapminder[gapminder$country=='Croatia'|gapminder$year>1990,])
+(gapminder[gapminder$country=='Croatia'&gapminder$year>1990,c('lifeExp','pop')])
+apply(gapminder[gapminder$country=='Croatia'&gapminder$year>1990,c('lifeExp','pop')],2,mean)
+apply(gapminder[gapminder$country=='Croatia'|gapminder$year>1990,c('lifeExp','pop')],2,mean)
+apply(gapminder[gapminder$country=='Croatia'|gapminder$year>1990,c('lifeExp','pop')],1,mean)
+apply(gapminder[gapminder$country=='Croatia'|gapminder$year>1990,c('lifeExp','pop')],2,mean)
+select(gapminder,country,year,lifeExp)
+dplyr::select
+dplyr::select(gapminder,country,year)
+gapminder%>%select(country,year)
+gapminder%>%filter(country=='Croatia')
+gapminder %>% summarize
+gapminder %>% summarize()
+gapminder %>% summarize(pop_avg=mean(pop))
+gapminder %>% group_by(continent) %>% summarize(pop_avg=mean(pop))
+summarize(group_by(gapminder,continent),pop_avg=mean(pop))
+chooseCRANmirror()
+?chooseCRANmirror
+getCRANmirrors()
+i <- function(x) {
+ str(x)
+ glimpse(x)
+}
+i(gapminder)
+iris %>%
+  subset(Sepal.Length > mean(Sepal.Length)) %$%
+  cor(Sepal.Length, Sepal.Width)
+install.packages('magrittr')
+library(magrittr)
+iris %>%
+  subset(Sepal.Length > mean(Sepal.Length)) %$%
+  cor(Sepal.Length, Sepal.Width)
+chooseCRANmirror(graphics=false,ind=60) 
+1:5 %>% paste(letters[.])
+1:5 %>% (letters[.])
+set.seed(123)
+rnorm(200) %>%
+matrix(ncol = 2) %T>%
+plot %>% 
+colSums
+q()
