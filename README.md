@@ -1,6 +1,6 @@
 # certutil
 
-![CI](https://github.com/pwnshui/certutil/workflows/CI/badge.svg)
+![JustARandomThing](https://github.com/pwnshui/certutil/workflows/CI/badge.svg)
 
 B64 certutil-encoded binary Collection
 
