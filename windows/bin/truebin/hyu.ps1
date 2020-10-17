@@ -1,5 +1,6 @@
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 
+# Comment from pwnshui: only install essential programs. subsequent batchfile will install all other programs.
 
 #   Description:
 # This script will use Windows package manager to bootstrap Chocolatey and
@@ -9,20 +10,28 @@ Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.
 $packages = @(
     "notepadplusplus.install"
     "peazip.install"
-    #"7zip.install"
+    "7zip.install"
+    "wget"
+    "youtube-dl"
+    "mpv.install"
+    "mpc-be"
+    "rufus"
     #"aimp"
     #"audacity"
     #"autoit"
     #"classic-shell"
     #"filezilla"
-    #"firefox"
+    "programmer-dvorak"
+    "clink"
+    "sublimetext3"
+    "firefox"
     #"gimp"
     #"google-chrome-x64"
     #"imgburn"
     #"keepass.install"
     #"paint.net"
     #"putty"
-    #"python"
+    "python"
     #"qbittorrent"
     #"speedcrunch"
     #"sysinternals"
